@@ -1,14 +1,14 @@
 // 搜索引擎配置
 const SEARCH_ENGINES = {
-    baidu: {
-        url: 'https://www.baidu.com/s?wd='
+     bing: {
+        url: 'https://www.bing.com/search?q='
     },
     google: {
         url: 'https://www.google.com/search?q='
     },
-    bing: {
-        url: 'https://www.bing.com/search?q='
-    }
+    baidu: {
+        url: 'https://www.baidu.com/s?wd='
+    },
 };
 
 // 保存搜索引擎选择
