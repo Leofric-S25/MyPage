@@ -18,7 +18,7 @@ function saveSearchEngine(engine) {
 
 // 获取保存的搜索引擎
 function getSearchEngine() {
-    return localStorage.getItem('preferred_search_engine') || 'baidu';
+    return localStorage.getItem('preferred_search_engine') || 'bing';
 }
 
 // 页面加载完成后初始化
