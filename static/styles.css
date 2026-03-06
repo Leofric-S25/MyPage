@@ -103,21 +103,27 @@ body {
 }
 
 /* 搜索栏样式 */
+/* 搜索栏样式 - 极简投资风重制版 */
 .search-bar {
     display: flex;
     width: 600px;
     max-width: 100%;
     position: relative;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(8px);
+    /* 1. 改变背景：从亮白改为极暗半透明 */
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(12px);
     border-radius: 8px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    /* 2. 边框：用微弱的线条代替厚重的阴影 */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: none;
 }
 
 .search-bar:focus-within {
-    transform: scale(1.01);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    /* 聚焦时：稍微提亮，取消放大效果以保持稳重 */
+    transform: none; 
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .search-icon {
@@ -125,58 +131,65 @@ body {
     left: 12px;
     top: 50%;
     transform: translateY(-50%);
-    color: #718096;
+    color: rgba(255, 255, 255, 0.2); /* 默认调暗 */
     pointer-events: none;
     transition: color 0.3s ease;
 }
 
 .search-bar:focus-within .search-icon {
-    color: #4299e1;
+    /* 聚焦时：从蓝色改为纯白 */
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .search-bar input {
     flex: 1;
-    padding: 10px;
-    padding-left: 35px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-right: none;
-    border-radius: 4px 0 0 4px;
+    padding: 12px;
+    padding-left: 40px;
+    font-size: 14px;
+    /* 3. 输入框透明化：移除原有的边框和背景 */
+    background: transparent !important;
+    border: none !important;
+    color: #ffffff;
     transition: all 0.3s ease;
 }
 
 .search-bar input:focus {
     outline: none;
-    border-color: #4299e1;
-    box-shadow: 0 0 0 2px rgba(66, 153, 225, 0.2);
+    box-shadow: none; /* 移除蓝色发光 */
 }
 
 .search-bar select {
     width: 100px;
     padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 0 4px 4px 0;
-    background-color: #f8f9fa;
+    font-size: 12px;
+    /* 4. 选择器：透明背景，去掉边框 */
+    background: transparent !important;
+    border: none !important;
+    border-left: 1px solid rgba(255, 255, 255, 0.05) !important;
+    color: rgba(255, 255, 255, 0.4);
     cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    appearance: none;
-    padding-right: 25px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* 兼容深色模式下的选项文字 */
+.search-bar select option {
+    background-color: #0a0a0a;
+    color: #fff;
 }
 
 .search-bar::after {
+    /* 保持 Font Awesome 箭头，但调暗颜色 */
     content: '\f0d7';
     font-family: 'Font Awesome 5 Free';
     font-weight: 900;
     position: absolute;
-    right: 10px;
+    right: 12px;
     top: 50%;
     transform: translateY(-50%);
-    color: #718096;
+    color: rgba(255, 255, 255, 0.2);
     pointer-events: none;
 }
-
 /* 动画效果 */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-10px); }
