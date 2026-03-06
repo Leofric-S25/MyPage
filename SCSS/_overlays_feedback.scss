@@ -1,0 +1,17 @@
+/*反馈与动画*/
+
+@import 'variables';
+
+/* 消息提示 */
+.message {
+    &.success { border-left: 4px solid $success-color; }
+    &.error { border-left: 4px solid $danger-color; }
+}
+
+/* 加载动画 */
+.lds-ripple { /* ... */ }
+
+/* 所有动画序列 */
+@keyframes fadeIn { /* ... */ }
+@keyframes slideIn { /* ... */ }
+@keyframes loading-wave { /* ... */ }

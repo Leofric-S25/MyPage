@@ -1,15 +1,15 @@
-/*视觉中枢*/
-// 配色方案
+/*视觉变量*/
+/* 提取自原 1283 行代码中的核心数值 */
 $primary-color: #4299e1;
-$bg-gradient: linear-gradient(135deg, #f6f9fc 0%, #edf2f7 100%);
-$text-main: #2d3748;
-$text-muted: #718096;
-$white-glass: rgba(255, 255, 255, 0.95);
-$border-color: rgba(226, 232, 240, 0.8);
+$primary-hover: #3182ce;
+$danger-color: #e53e3e;
+$success-color: #48bb78;
 
-// 阴影
-$shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
-$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+$bg-body: linear-gradient(135deg, #f6f9fc 0%, #edf2f7 100%);
+$glass-bg: rgba(255, 255, 255, 0.95);
+$border-light: rgba(226, 232, 240, 0.8);
 
-// 字体
-$font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$shadow-standard: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+$font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;

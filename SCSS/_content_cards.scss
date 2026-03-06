@@ -1,0 +1,25 @@
+/*内容和卡片*/
+
+@import 'variables';
+
+.group {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.link-card {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    transition: all 0.3s ease;
+    /* 嵌套内部元素 */
+    .link-icon { /* ... */ }
+    .link-title { /* ... */ }
+    
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: $shadow-hover;
+    }
+}

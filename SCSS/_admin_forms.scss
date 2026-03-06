@@ -1,0 +1,21 @@
+/*后台管理与填表*/
+
+@import 'variables';
+
+.modal { /* 弹窗背景 */ }
+.modal-content { /* 弹窗容器 */ }
+
+.form-group {
+    margin-bottom: 15px;
+    label { display: block; margin-bottom: 5px; }
+    input, textarea {
+        width: 100%;
+        border: 1px solid #ddd;
+        /* ... */
+    }
+}
+
+.admin-button {
+    background: linear-gradient(135deg, $primary-color 0%, $primary-hover 100%);
+    /* ... 包含退出按钮的红色逻辑 */
+}

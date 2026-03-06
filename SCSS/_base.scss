@@ -1,8 +1,7 @@
-
+/*全局变量*/
 
 @import 'variables';
 
-/* 全局样式 */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -10,10 +9,10 @@
 }
 
 body {
-    font-family: $font-stack;
+    font-family: $font-family;
     line-height: 1.6;
-    color: #333; // 原始代码值
-    background: $bg-gradient;
+    color: #333;
+    background: $bg-body;
     min-height: 100vh;
 }
 
@@ -25,4 +24,16 @@ body {
     margin: 0 auto;
     padding: 20px;
     animation: fadeIn 0.5s ease;
+}
+
+/* 原始代码末尾的响应式部分 */
+@media (max-width: 992px) {
+    .container { grid-template-columns: 180px 1fr; gap: 20px; }
+    .search-bar { width: 100%; }
+}
+
+@media (max-width: 768px) {
+    .container { grid-template-columns: 1fr; }
+    .nav-sidebar { position: static; margin-bottom: 20px; }
+    /* ... 保持原代码中的其他移动端适配 */
 }
