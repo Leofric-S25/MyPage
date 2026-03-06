@@ -1274,24 +1274,46 @@ body {
 } 
 
 /* 管理员按钮 */
+/* 管理员登录入口 - 极简投资风重制版 */
 #adminButton {
     display: flex;
-    gap: 10px;
+    gap: 12px;
     align-items: center;
 }
 
 .admin-button {
-    background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+    /* 1. 移除蓝色渐变，改为极暗半透明背景 */
+    background: rgba(255, 255, 255, 0.03) !important;
+    backdrop-filter: blur(4px);
     border-radius: 6px;
     padding: 8px 16px;
-    color: white;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    border: none;
+    /* 2. 文字颜色：改为淡灰色，增加呼吸感 */
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 12px;
+    font-weight: 400;
+    /* 3. 边框：极细的白边，定义空间感 */
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+    text-transform: uppercase; /* 大写字母增加工业感 */
+    letter-spacing: 1px;
+}
+
+.admin-button i {
+    font-size: 11px;
+    opacity: 0.5;
+}
+
+.admin-button:hover {
+    /* 4. 悬停反馈：背景微亮，文字转白，边框加深 */
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
 }
 
 /* 不同按钮的颜色 */
