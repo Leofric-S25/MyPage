@@ -1172,6 +1172,7 @@ body {
 }
 
 /* GitHub 链接样式 */
+/* --- GitHub 链接：重制为极简工业风 --- */
 .header-actions {
     display: flex;
     align-items: center;
@@ -1179,77 +1180,91 @@ body {
 }
 
 .github-link {
-    color: #4a5568;
-    font-size: 24px;
+    color: rgba(255, 255, 255, 0.3); /* 初始调暗 */
+    font-size: 20px; /* 稍微缩小一点更精致 */
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
+    border: 1px solid transparent;
 }
 
 .github-link:hover {
-    color: #2d3748;
+    color: #ffffff;
     transform: translateY(-2px);
-    background: #edf2f7;
-} 
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+}
 
+/* --- 内容卡片：重制为深色玻璃质感 --- */
 .link-card {
     position: relative;
-    display: block;
-    padding: 15px;
-    margin-bottom: 15px;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 10px;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    border: 1px solid rgba(226, 232, 240, 0.8);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    backdrop-filter: blur(8px);
-    height: 90px;
     display: flex;
+    padding: 15px 20px; /* 增加一点横向内边距 */
+    margin-bottom: 15px;
+    /* 背景：极暗透明，产生深度感 */
+    background: rgba(255, 255, 255, 0.02) !important;
+    backdrop-filter: blur(12px);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* 边框：线性光感 */
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    box-shadow: none !important;
+    height: 90px;
     align-items: center;
-    gap: 15px;
+    gap: 18px;
     overflow: hidden;
     cursor: pointer;
+}
+
+.link-card:hover {
+    /* 悬停效果：卡片变亮，边框微显 */
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    transform: scale(1.02); /* 极轻微的放大，模仿点击欲望 */
 }
 
 .link-info {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 15px;
     width: 100%;
     min-width: 0;
 }
 
 .link-title {
-    font-size: 16px;
-    color: #2d3748;
-    font-weight: 500;
+    font-size: 15px;
+    color: rgba(255, 255, 255, 0.85); /* 标题接近纯白但保留一点柔和 */
+    font-weight: 400;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     display: block;
-    margin-bottom: 4px;
+    margin-bottom: 2px;
 }
 
 .link-icon {
-    width: 40px;
-    height: 40px;
-    min-width: 40px;
-    border-radius: 6px;
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    border-radius: 8px;
     overflow: hidden;
-    background: #f7fafc;
+    /* 图标背景：不再是浅灰，而是深色微光 */
+    background: rgba(255, 255, 255, 0.03);
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0;
+    padding: 6px;
     align-self: center;
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+/* 链接操作按钮（管理员可见） */
 .link-actions {
     position: absolute;
     right: 15px;
@@ -1258,20 +1273,27 @@ body {
     display: flex;
     gap: 8px;
     opacity: 0;
-    transition: opacity 0.3s ease;
-    margin-left: 10px;
-    flex-shrink: 0;
-    z-index: 1;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.link-card:hover .link-actions {
+    opacity: 1; /* 悬停时才显现操作按钮，保持平时视觉极简 */
 }
 
 .link-actions button {
-    position: relative;
-    z-index: 2;
+    background: #1a1a1a !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #888 !important;
+    padding: 4px 8px !important;
+    border-radius: 4px;
+    font-size: 10px;
 }
 
 .link-actions button:hover {
-    z-index: 3;
-} 
+    color: #fff !important;
+    border-color: rgba(255, 255, 255, 0.3) !important;
+}
 
 /* 管理员按钮 */
 /* 管理员登录入口 - 极简投资风重制版 */
