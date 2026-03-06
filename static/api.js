@@ -1,105 +1,119 @@
 /**
- * 豫択曦的云端指挥部 - API 通讯模块
- * 处理与 Cloudflare Workers 后端的 D1 数据库交互
+ * 豫択曦的云端指挥部 - 逻辑控制中心
  */
 
-// 1. 基础配置：确保指向你部署的 Worker 域名
-const API_BASE_URL = 'https://mypage.onexp.workers.dev/api';
-
-// 2. Token 持久化管理
-const auth = {
-    setToken(token) {
-        localStorage.setItem('admin_token', token);
-    },
-    getToken() {
-        return localStorage.getItem('admin_token');
-    },
-    clearToken() {
-        localStorage.removeItem('admin_token');
-    }
-};
-
-/**
- * 核心请求封装
- * @param {string} endpoint - API 路径 (如 /links)
- * @param {object} options - Fetch 配置
- */
-async function fetchAPI(endpoint, options = {}) {
-    const token = auth.getToken();
-    
-    // 合并 Headers
-    const headers = {
-        'Content-Type': 'application/json',
-        ...options.headers
-    };
-
-    // 如果有 Token，自动注入 Authorization Header
-    if (token) {
-        headers['Authorization'] = `Bearer ${token}`;
-    }
+// 1. 初始化页面数据
+async function init() {
+    console.log("Checking API connection...");
+    const navContainer = document.getElementById('navigation');
+    const groupNav = document.getElementById('groupNav');
 
     try {
-        const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-            ...options,
-            headers
-        });
+        // 使用 api.js 中定义的全局 window.api 对象
+        const groups = await window.api.getGroups();
+        const links = await window.api.getLinks();
 
-        // 处理 401 Unauthorized (Token 过期或错误)
-        if (response.status === 401) {
-            auth.clearToken();
-            throw new Error('会话已过期，请重新登录');
-        }
+        console.log("Data Received:", { groups, links });
 
-        const data = await response.json();
+        // 保存到全局供筛选使用
+        window.allGroups = groups;
+        window.allLinks = links;
 
-        if (!response.ok) {
-            throw new Error(data.error || `请求失败: ${response.status}`);
-        }
+        renderGroupNav(groups);
+        renderLinks(links);
+        
+        // 更新底部模拟状态（建议2的预留）
+        updateSystemStatus();
 
-        return data;
     } catch (error) {
-        console.error(`[API Error] ${endpoint}:`, error);
-        throw error;
+        console.error("Initialization Failed:", error);
+        if (navContainer) {
+            navContainer.innerHTML = `<div class="col-span-full text-center py-10 opacity-50 mono text-xs uppercase">
+                Connection Error: ${error.message} <br> 
+                Check Worker URL in api.js
+            </div>`;
+        }
     }
 }
 
-// 3. 业务逻辑接口封装
+// 2. 渲染顶部导航
+function renderGroupNav(groups) {
+    const nav = document.getElementById('groupNav');
+    if (!nav) return;
 
-// --- 身份验证 ---
-const apiLogin = (password) => fetchAPI('/login', {
-    method: 'POST',
-    body: JSON.stringify({ password })
-});
+    const items = groups.map(g => `
+        <div class="nav-item opacity-40 hover:opacity-100 transition cursor-pointer px-2" 
+             onclick="filterByGroup(${g.id}, this)">
+            ${g.name.toUpperCase()}
+        </div>
+    `).join('');
 
-// --- 分组管理 (Groups) ---
-const apiGetGroups = () => fetchAPI('/groups');
-const apiCreateGroup = (data) => fetchAPI('/groups', { method: 'POST', body: JSON.stringify(data) });
-const apiUpdateGroup = (id, data) => fetchAPI(`/groups/${id}`, { method: 'PUT', body: JSON.stringify(data) });
-const apiDeleteGroup = (id) => fetchAPI(`/groups/${id}`, { method: 'DELETE' });
+    nav.innerHTML = `<div class="nav-item active text-white" onclick="filterByGroup('all', this)">ALL_SECTORS</div>` + items;
+}
 
-// --- 链接管理 (Links) ---
-const apiGetLinks = () => fetchAPI('/links');
-const apiCreateLink = (data) => fetchAPI('/links', { method: 'POST', body: JSON.stringify(data) });
-const apiUpdateLink = (id, data) => fetchAPI(`/links/${id}`, { method: 'PUT', body: JSON.stringify(data) });
-const apiDeleteLink = (id) => fetchAPI(`/links/${id}`, { method: 'DELETE' });
+// 3. 渲染链接卡片
+function renderLinks(links, element) {
+    const container = document.getElementById('navigation');
+    if (!container) return;
 
-// --- 扩展功能：获取网页元数据 (用于自动填充名称/图标) ---
-const apiFetchWebInfo = (url) => fetchAPI('/fetch-info', {
-    method: 'POST',
-    body: JSON.stringify({ url })
-});
+    // 处理导航激活高亮
+    if (element) {
+        document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active', 'text-white'));
+        element.classList.add('active', 'text-white');
+    }
 
-// 导出到全局作用域供 app.js 使用
-window.api = {
-    login: apiLogin,
-    getGroups: apiGetGroups,
-    createGroup: apiCreateGroup,
-    updateGroup: apiUpdateGroup,
-    deleteGroup: apiDeleteGroup,
-    getLinks: apiGetLinks,
-    createLink: apiCreateLink,
-    updateLink: apiUpdateLink,
-    deleteLink: apiDeleteLink,
-    fetchWebInfo: apiFetchWebInfo,
-    auth
-};
+    if (!links || links.length === 0) {
+        container.innerHTML = `<div class="col-span-full py-20 text-center opacity-20 mono text-[10px] tracking-widest">NO DATA IN SECTOR</div>`;
+        return;
+    }
+
+    container.innerHTML = links.map(link => `
+        <a href="${link.url}" target="_blank" class="glass p-6 rounded-xl border border-white/5 hover:border-white/20 transition-all group">
+            <div class="flex justify-between items-start mb-4">
+                <span class="text-[9px] mono opacity-30 uppercase tracking-[0.2em]">
+                    ${getGroupName(link.group_id)}
+                </span>
+                <i class="fas fa-external-link-alt text-[9px] opacity-10 group-hover:opacity-100 transition"></i>
+            </div>
+            <h3 class="text-sm font-medium text-white/80 mb-2 group-hover:text-white transition">${link.name}</h3>
+            <p class="text-[11px] leading-relaxed opacity-40 group-hover:opacity-60 transition line-clamp-2">
+                ${link.description || 'Accessing remote node...'}
+            </p>
+        </a>
+    `).join('');
+}
+
+// 4. 辅助功能
+function getGroupName(id) {
+    const g = window.allGroups ? window.allGroups.find(g => g.id === id) : null;
+    return g ? g.name : 'DATA';
+}
+
+function filterByGroup(groupId, element) {
+    if (groupId === 'all') {
+        renderLinks(window.allLinks, element);
+    } else {
+        const filtered = window.allLinks.filter(l => l.group_id === groupId);
+        renderLinks(filtered, element);
+    }
+}
+
+function updateSystemStatus() {
+    // 建议2的逻辑将在此处更新
+    console.log("System Status: Terminal Ready.");
+}
+
+// 5. 模态框逻辑适配
+function handleLogin(event) {
+    event.preventDefault();
+    const pwd = document.getElementById('adminPassword').value;
+    window.api.login(pwd)
+        .then(data => {
+            window.api.auth.setToken(data.token);
+            location.reload(); // 登录成功刷新页面
+        })
+        .catch(err => alert("UNAUTHORIZED: " + err.message));
+}
+
+// 监听加载
+document.addEventListener('DOMContentLoaded', init);
