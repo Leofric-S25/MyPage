@@ -1,30 +1,21 @@
-/*侧边栏和头部*/
-
-@import 'variables';
-
+/* _nav_header.scss */
 .nav-sidebar {
     position: sticky;
     top: 20px;
     background: $glass-bg;
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(15px);
     border-radius: 10px;
     padding: 15px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     border: 1px solid $border-light;
-    /* 嵌套 nav-item 和 active 状态 */
+
     .nav-item {
-        &.active { color: $primary-color; background: #e6f0fb; }
+        color: $text-muted;
+        &.active { color: $primary-color; background: rgba(255,255,255,0.05); }
     }
 }
 
 .header {
-    display: flex;
-    justify-content: space-between;
     background: $glass-bg;
-    /* ... 保持原代码属性 */
-}
-
-.search-bar {
-    /* 包含原代码中 input, select, icon 的所有状态 */
-    input:focus { border-color: $primary-color; }
+    backdrop-filter: blur(15px);
+    border: 1px solid $border-light;
 }

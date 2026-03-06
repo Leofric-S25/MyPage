@@ -3,7 +3,7 @@
 @import 'variables';
 
 .group {
-    background: white;
+    background: $glass-bg !important;  // 使用极淡的半透明白
     padding: 20px;
     border-radius: 10px;
     margin-bottom: 15px;

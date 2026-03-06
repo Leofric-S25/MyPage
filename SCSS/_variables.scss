@@ -1,15 +1,22 @@
-/*视觉变量*/
-/* 提取自原 1283 行代码中的核心数值 */
+/* _variables.scss */
+// 核心配色
 $primary-color: #4299e1;
-$primary-hover: #3182ce;
-$danger-color: #e53e3e;
-$success-color: #48bb78;
+$primary-hover: #3182ce; // 确保这个变量存在
+$danger-color: #ff4d4f;
+$success-color: #00e676;
 
-$bg-body: linear-gradient(135deg, #f6f9fc 0%, #edf2f7 100%);
-$glass-bg: rgba(255, 255, 255, 0.95);
-$border-light: rgba(226, 232, 240, 0.8);
+// 极致黑背景
+$bg-body: linear-gradient(180deg, #050505 0%, #0a0a0a 100%);
+$glass-bg: rgba(255, 255, 255, 0.02);
+$glass-bg-hover: rgba(255, 255, 255, 0.06);
 
-$shadow-standard: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-$shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+// 边框与阴影
+$border-light: rgba(255, 255, 255, 0.05);
+$shadow-standard: 0 8px 32px rgba(0, 0, 0, 0.6);
+$shadow-hover: 0 15px 45px rgba(0, 0, 0, 0.8);
 
-$font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+// 文字颜色
+$text-main: rgba(255, 255, 255, 0.85);
+$text-muted: rgba(255, 255, 255, 0.45);
+
+$font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;

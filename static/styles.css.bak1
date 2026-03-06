@@ -1,0 +1,156 @@
+@charset "UTF-8";
+/* 豫択曦 | 源代码 1283 行逻辑完整拆分版 */
+/* main.scss - 豫択曦的样式总控中心 */
+/* 豫択曦 | 源代码 1283 行逻辑完整拆分版 */
+/* _variables.scss */
+/*反馈与动画*/
+/* _variables.scss */
+/* 保持原有动画逻辑，仅引用颜色变量 */
+.message {
+  background: #222;
+  color: rgba(255, 255, 255, 0.85);
+}
+.message.success {
+  border-left: 4px solid #00e676;
+}
+.message.error {
+  border-left: 4px solid #ff4d4f;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes slideIn {
+  from {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes loading-wave {
+  0% {
+    top: 36px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: 0;
+    left: 0;
+    width: 72px;
+    height: 72px;
+    opacity: 0;
+  }
+}
+/* _base.scss */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.85);
+  background: linear-gradient(180deg, #050505 0%, #0a0a0a 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  animation: fadeIn 0.5s ease;
+}
+
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}
+/* _nav_header.scss */
+.nav-sidebar {
+  position: sticky;
+  top: 20px;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(15px);
+  border-radius: 10px;
+  padding: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+.nav-sidebar .nav-item {
+  color: rgba(255, 255, 255, 0.45);
+}
+.nav-sidebar .nav-item.active {
+  color: #4299e1;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.header {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/*内容和卡片*/
+/* _variables.scss */
+.group {
+  background: rgba(255, 255, 255, 0.02) !important;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.link-card {
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  transition: all 0.3s ease;
+  /* 嵌套内部元素 */
+}
+.link-card .link-icon { /* ... */ }
+.link-card .link-title { /* ... */ }
+.link-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.8);
+}
+
+/*后台管理与填表*/
+/* _variables.scss */
+.modal { /* 弹窗背景 */ }
+
+.modal-content { /* 弹窗容器 */ }
+
+.form-group {
+  margin-bottom: 15px;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+.form-group input, .form-group textarea {
+  width: 100%;
+  border: 1px solid #ddd;
+  /* ... */
+}
+
+.admin-button {
+  background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+  /* ... 包含退出按钮的红色逻辑 */
+}/*# sourceMappingURL=main.css.map */
