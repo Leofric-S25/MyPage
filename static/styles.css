@@ -1227,10 +1227,25 @@ body {
 
 /* 管理员按钮 */
 #adminButton {
-    displ
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.admin-button {
+    background: linear-gradient(135deg, #4299e1 0%, #3182ce 100%);
+    border-radius: 6px;
     padding: 8px 16px;
     color: white;
-    font-weig
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
 /* 不同按钮的颜色 */
 .admin-button[onclick*="handleLogout"] {
     background: #e53e3e;
