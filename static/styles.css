@@ -1317,37 +1317,54 @@ body {
 }
 
 /* 不同按钮的颜色 */
+/* 不同状态按钮的颜色 - 极简投资风重制版 */
+
+/* 1. 登出按钮：从鲜红改为暗红边框 */
 .admin-button[onclick*="handleLogout"] {
-    background: #e53e3e;
+    background: rgba(229, 62, 62, 0.05) !important;
+    border: 1px solid rgba(229, 62, 62, 0.2) !important;
+    color: rgba(229, 62, 62, 0.6) !important;
 }
 
 .admin-button[onclick*="handleLogout"]:hover {
-    background: #c53030;
+    background: rgba(229, 62, 62, 0.15) !important;
+    color: #fc8181 !important;
+    border-color: rgba(229, 62, 62, 0.4) !important;
 }
 
+/* 2. 退出编辑/取消按钮：保持低调灰 */
 .admin-button[onclick*="exitEditMode"] {
-    background: #718096;
+    background: rgba(255, 255, 255, 0.02) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: rgba(255, 255, 255, 0.3) !important;
 }
 
 .admin-button[onclick*="exitEditMode"]:hover {
-    background: #4a5568;
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: #fff !important;
 }
 
+/* 3. 登录/进入编辑按钮：统一为极简白 */
 .admin-button[onclick*="enterEditMode"],
 .admin-button[onclick*="openAdminModal"] {
-    background: #4299e1;
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: rgba(255, 255, 255, 0.5) !important;
 }
 
 .admin-button[onclick*="enterEditMode"]:hover,
 .admin-button[onclick*="openAdminModal"]:hover {
-    background: #3182ce;
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: #fff !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
 }
 
+/* 通用悬停效果微调 */
 .admin-button:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 6px -1px rgba(66, 153, 225, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
 }
 
 .admin-button i {
-    font-size: 14px;
-} 
+    font-size: 11px; /* 缩小图标比例 */
+}
