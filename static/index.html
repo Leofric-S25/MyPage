@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gaze_Zone</title>
+    <title>豫択曦的云端指挥部</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="toast.css">
     
     <style>
@@ -23,8 +24,8 @@
         }
         .mono { font-family: 'JetBrains Mono', monospace; }
         .glass { background: var(--glass-bg); backdrop-filter: blur(12px); border: 1px solid var(--glass-border); }
-        .card-hover:hover { border-color: rgba(255, 255, 255, 0.2); transform: translateY(-1px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        /* 隐藏原有的 Loading 样式，改用更现代的 */
+        
+        /* Loading 动画 */
         .loading-wave { display: flex; gap: 4px; justify-content: center; padding: 40px; }
         .loading-wave div { width: 2px; height: 16px; background: rgba(255,255,255,0.2); animation: wave 1s infinite ease-in-out; }
         @keyframes wave { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(2); background: white; } }
@@ -34,25 +35,22 @@
 
     <div id="toastContainer" class="toast-container fixed top-4 right-4 z-50"></div>
 
-    <header class="flex justify-between items-center mb-20 opacity-40 text-[10px] tracking-[0.3em] uppercase mono">
+    <header class="flex justify-between items-center mb-16 opacity-40 text-[10px] tracking-[0.3em] uppercase mono">
         <div class="flex items-center gap-4">
             <span class="text-white/80">Ashine Command</span>
             <span class="hidden md:inline border-l border-white/20 pl-4">MECH-ENGINEER / INVESTOR</span>
         </div>
         <div class="flex gap-6 items-center">
             <span id="pve-status" class="flex items-center gap-2">
-                <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> ACTIVE
+                <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span> ACTIVE
             </span>
-            <a href="https://github.com/yvyan/MyPage" target="_blank" class="hover:text-white transition">
-                <i class="fab fa-github"></i>
-            </a>
             <button onclick="openAdminModal()" class="hover:text-white transition">
                 <i class="fas fa-user-lock"></i>
             </button>
         </div>
     </header>
 
-    <div class="max-w-xl mx-auto w-full mb-16">
+    <div class="max-w-xl mx-auto w-full mb-12">
         <form onsubmit="handleSearch(event)" class="relative group">
             <input type="text" id="searchInput" placeholder="SEARCH SYSTEM..." 
                    class="w-full bg-transparent border-b border-white/10 py-2 px-8 text-sm focus:outline-none focus:border-white/40 transition mono">
@@ -68,7 +66,7 @@
     </div>
 
     <main class="flex-grow max-w-7xl mx-auto w-full">
-        <nav id="groupNav" class="flex flex-wrap gap-8 mb-12 text-xs uppercase tracking-widest mono opacity-30 hover:opacity-100 transition"></nav>
+        <nav id="groupNav" class="flex flex-wrap gap-8 mb-12 text-[11px] uppercase tracking-widest mono"></nav>
 
         <div id="navigation" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
             <div class="loading col-span-full">
@@ -77,31 +75,62 @@
         </div>
     </main>
 
-    <footer class="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 opacity-30 text-[9px] tracking-widest uppercase mono">
+    <footer class="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 opacity-20 text-[9px] tracking-widest uppercase mono">
         <div>&copy; 2026 ASHINE CLOUD HADOOP</div>
         <div class="flex gap-8">
-            <span>Disk: 5TB (RAID-Z)</span>
-            <span>Temp: 42°C</span>
+            <span id="disk-info">DISK: 5TB / 1.2TB FREE</span>
+            <span id="temp-info">TEMP: 42°C</span>
         </div>
     </footer>
 
-    <div id="adminModal" class="modal fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-sm flex items-center justify-center p-6">
+    <div id="adminModal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-sm flex items-center justify-center p-6">
         <div class="glass p-8 rounded-2xl w-full max-w-sm">
-            <h2 class="text-sm uppercase tracking-widest mb-8 text-white/80">Authorize Access</h2>
+            <h2 class="text-[10px] uppercase tracking-[0.2em] mb-8 text-white/50">Authorize Access</h2>
             <form id="adminForm" onsubmit="handleLogin(event)" class="space-y-6">
                 <input type="password" id="adminPassword" placeholder="PASSWORD" required
                        class="w-full bg-white/5 border border-white/10 p-3 rounded-lg focus:outline-none focus:border-white/30 text-sm mono">
                 <div class="flex gap-4">
-                    <button type="submit" class="flex-grow bg-white/10 hover:bg-white/20 py-3 rounded-lg text-xs tracking-widest transition">LOGIN</button>
-                    <button type="button" onclick="closeAdminModal()" class="px-6 py-3 text-xs opacity-40">EXIT</button>
+                    <button type="submit" class="flex-grow bg-white/10 hover:bg-white/20 py-3 rounded-lg text-[10px] tracking-widest transition">LOGIN</button>
+                    <button type="button" onclick="closeAdminModal()" class="px-6 py-3 text-[10px] opacity-40">EXIT</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <div id="confirmDialog" class="hidden">...</div>
+    <div id="linkModal" class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-sm flex items-center justify-center p-6 overflow-y-auto">
+        <div class="glass p-8 rounded-2xl w-full max-w-md my-auto">
+            <h2 class="text-[10px] uppercase tracking-[0.2em] mb-6 text-white/50">Manage Resource</h2>
+            <form id="linkForm" onsubmit="handleLinkSubmit(event)" class="space-y-4">
+                <input type="url" id="linkUrl" placeholder="URL" required>
+                <input type="text" id="linkName" placeholder="NAME" required>
+                <textarea id="linkDescription" placeholder="DESCRIPTION" class="w-full bg-white/5 border border-white/10 p-3 rounded-lg focus:outline-none focus:border-white/30 text-sm h-24"></textarea>
+                <select id="linkGroup" required class="w-full bg-[#111] border border-white/10 p-3 rounded-lg"></select>
+                <div class="flex gap-3">
+                    <button type="submit" class="flex-grow bg-white/10 hover:bg-white/20 py-3 rounded-lg text-[10px] tracking-widest">SAVE</button>
+                    <button type="button" onclick="closeLinkModal()" class="px-6 py-3 text-[10px] opacity-40">CANCEL</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="confirmDialog" class="fixed inset-0 z-[100] hidden bg-black/80 flex items-center justify-center p-6">
+        <div class="glass p-8 rounded-2xl max-w-xs text-center">
+            <div class="confirm-title text-sm mb-2 text-white"></div>
+            <div class="confirm-message text-xs opacity-50 mb-6"></div>
+            <div class="flex gap-4">
+                <button class="confirm-cancel flex-grow py-2 text-[10px] opacity-40 uppercase">No</button>
+                <button class="confirm-ok flex-grow py-2 bg-red-500/20 text-red-500 rounded text-[10px] uppercase">Yes</button>
+            </div>
+        </div>
+    </div>
 
     <script src="api.js"></script>
     <script src="app.js"></script>
+    <script>
+        // 简单的模态框控制逻辑，防止 app.js 还没加载时点击报错
+        function openAdminModal() { document.getElementById('adminModal').classList.remove('hidden'); }
+        function closeAdminModal() { document.getElementById('adminModal').classList.add('hidden'); }
+        function closeLinkModal() { document.getElementById('linkModal').classList.add('hidden'); }
+    </script>
 </body>
 </html>
