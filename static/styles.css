@@ -1515,3 +1515,27 @@ body {
 .admin-button i {
     font-size: 11px; /* 缩小图标比例 */
 }
+
+/* --- 修复：强制隐藏页面底部的冗余管理界面 --- */
+
+/* 1. 隐藏常驻在页面流中的管理控制条 */
+.admin-controls, 
+#admin-login-form, 
+.login-section {
+    display: none !important;
+}
+
+/* 2. 只有当这些元素处于 .modal (模态框) 内部时才允许显示 */
+.modal .admin-controls,
+.modal #admin-login-form,
+.modal .login-section,
+.modal form {
+    display: flex !important;
+}
+
+/* 3. 如果你的编辑按钮是在登录后直接出现在页面上的，
+   请确保它们只在 body 带有 .admin-mode 类时显示 */
+body:not(.admin-mode) .group-actions,
+body:not(.admin-mode) .link-actions {
+    display: none !important;
+}
