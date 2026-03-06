@@ -174,3 +174,27 @@ function showToast(message, type = 'info') {
 
 // 启动
 document.addEventListener('DOMContentLoaded', init);
+
+// 修改 renderGroupNav 增加防御检查
+function renderGroupNav(groups) {
+    const nav = document.getElementById('groupNav');
+    if (!nav) {
+        console.warn('DOM element "groupNav" not found yet.');
+        return;
+    }
+    
+    const items = groups.map(g => `
+        <div class="nav-item opacity-40 hover:opacity-100 transition cursor-pointer" 
+             onclick="filterByGroup(${g.id}, this)">
+            ${g.name}
+        </div>
+    `).join('');
+    
+    nav.innerHTML = `<div class="nav-item active" onclick="renderLinks(allLinks, this)">ALL</div>` + items;
+}
+
+// 确保 DOM 加载后再执行
+document.addEventListener('DOMContentLoaded', () => {
+    console.log("DOM fully loaded, initializing app...");
+    init(); 
+});
