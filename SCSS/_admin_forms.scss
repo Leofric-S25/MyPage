@@ -1,21 +1,33 @@
-/*后台管理与填表*/
-
-@import 'variables';
-
-.modal { /* 弹窗背景 */ }
-.modal-content { /* 弹窗容器 */ }
-
-.form-group {
-    margin-bottom: 15px;
-    label { display: block; margin-bottom: 5px; }
-    input, textarea {
-        width: 100%;
-        border: 1px solid #ddd;
-        /* ... */
-    }
-}
+// 后台表单与按钮
 
 .admin-button {
     background: linear-gradient(135deg, $primary-color 0%, $primary-hover 100%);
-    /* ... 包含退出按钮的红色逻辑 */
+    padding: 8px 18px;
+    border-radius: 6px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+
+    &:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba($primary-color, 0.3); }
+    &.logout { background: $danger-color; }
+}
+
+.modal-content {
+    background: #0f0f0f;
+    border: 1px solid $border-light;
+    padding: 30px;
+    border-radius: 15px;
+    color: $text-main;
+
+    input, textarea, select {
+        width: 100%;
+        padding: 12px;
+        margin-top: 8px;
+        background: rgba(255,255,255,0.05);
+        border: 1px solid $border-light;
+        color: white;
+        border-radius: 6px;
+    }
 }

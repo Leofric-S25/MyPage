@@ -1,4 +1,5 @@
-/* _base.scss */
+// 地基和容器
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -18,7 +19,7 @@ body {
     display: grid;
     grid-template-columns: 200px 1fr;
     gap: 30px;
-    max-width: 1200px;
+    max-width: 1300px;
     margin: 0 auto;
     padding: 20px;
     animation: fadeIn 0.5s ease;

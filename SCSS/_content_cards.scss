@@ -1,25 +1,59 @@
-/*内容和卡片*/
-
-@import 'variables';
+// 卡片和网络链接相关样式
 
 .group {
-    background: $glass-bg !important;  // 使用极淡的半透明白
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 30px;
+    background: $glass-bg;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid $border-light;
+
+    .group-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid $border-light;
+        color: $text-main;
+    }
+}
+
+.links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
 }
 
 .link-card {
     display: flex;
     align-items: center;
-    padding: 12px 15px;
+    gap: 15px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    border: 1px solid $border-light;
+    text-decoration: none;
     transition: all 0.3s ease;
-    /* 嵌套内部元素 */
-    .link-icon { /* ... */ }
-    .link-title { /* ... */ }
-    
+    animation: float 6s ease-in-out infinite;
+
+    .link-icon {
+        width: 45px;
+        height: 45px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img { width: 24px; height: 24px; }
+    }
+
+    .link-title { color: $text-main; font-weight: 500; }
+    .link-description { color: $text-muted; font-size: 13px; }
+
     &:hover {
-        transform: translateY(-2px);
+        transform: translateY(-3px);
+        background: $glass-bg-hover;
+        border-color: rgba($primary-color, 0.3);
         box-shadow: $shadow-hover;
     }
 }

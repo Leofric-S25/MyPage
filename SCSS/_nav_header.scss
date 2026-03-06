@@ -1,21 +1,79 @@
-/* _nav_header.scss */
+// (侧边栏与头部)
+
 .nav-sidebar {
     position: sticky;
     top: 20px;
     background: $glass-bg;
     backdrop-filter: blur(15px);
-    border-radius: 10px;
-    padding: 15px;
+    border-radius: 12px;
+    padding: 20px;
     border: 1px solid $border-light;
 
-    .nav-item {
+    .nav-title {
+        font-size: 14px;
+        font-weight: 600;
         color: $text-muted;
-        &.active { color: $primary-color; background: rgba(255,255,255,0.05); }
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid $border-light;
+    }
+
+    .nav-list {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .nav-item {
+        padding: 8px 12px;
+        font-size: 14px;
+        color: $text-muted;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+        text-decoration: none;
+
+        &:hover { color: $text-main; background: $glass-bg-hover; }
+        &.active { color: $primary-color; background: $glass-bg-active; }
     }
 }
 
 .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 15px 25px;
     background: $glass-bg;
     backdrop-filter: blur(15px);
+    border-radius: 12px;
     border: 1px solid $border-light;
+}
+
+.search-bar {
+    display: flex;
+    width: 600px;
+    position: relative;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    border: 1px solid $border-light;
+
+    input {
+        flex: 1;
+        padding: 10px 15px 10px 40px;
+        background: transparent;
+        border: none;
+        color: $text-main;
+        outline: none;
+    }
+
+    select {
+        background: transparent;
+        color: $text-muted;
+        border: none;
+        border-left: 1px solid $border-light;
+        padding: 0 10px;
+        outline: none;
+    }
 }

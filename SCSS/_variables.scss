@@ -1,22 +1,28 @@
-/* _variables.scss */
-// 核心配色
-$primary-color: #4299e1;
-$primary-hover: #3182ce; // 确保这个变量存在
-$danger-color: #ff4d4f;
-$success-color: #00e676;
+//(视觉变量)
 
-// 极致黑背景
+// 1. 全局背景
 $bg-body: linear-gradient(180deg, #050505 0%, #0a0a0a 100%);
+
+// 2. 材质颜色 (透明度方案)
 $glass-bg: rgba(255, 255, 255, 0.02);
 $glass-bg-hover: rgba(255, 255, 255, 0.06);
+$glass-bg-active: rgba(255, 255, 255, 0.08);
 
-// 边框与阴影
+// 3. 文字颜色
+$text-main: rgba(255, 255, 255, 0.85); 
+$text-muted: rgba(255, 255, 255, 0.4); 
+$text-dim: rgba(255, 255, 255, 0.2);   
+
+// 4. 边框与阴影
 $border-light: rgba(255, 255, 255, 0.05);
-$shadow-standard: 0 8px 32px rgba(0, 0, 0, 0.6);
-$shadow-hover: 0 15px 45px rgba(0, 0, 0, 0.8);
+$shadow-standard: 0 10px 30px rgba(0, 0, 0, 0.5);
+$shadow-hover: 0 10px 25px rgba(0, 0, 0, 0.5);
 
-// 文字颜色
-$text-main: rgba(255, 255, 255, 0.85);
-$text-muted: rgba(255, 255, 255, 0.45);
+// 5. 强调色 (必须定义 $primary-hover 防止报错)
+$primary-color: #4299e1;
+$primary-hover: #3182ce; 
+$success-color: #48bb78;
+$danger-color: #e53e3e;
 
-$font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+// 6. 字体
+$font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "JetBrains Mono", monospace;

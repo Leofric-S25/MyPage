@@ -1,11 +1,7 @@
-/*反馈与动画*/
-
-@import 'variables';
-
-/* 保持原有动画逻辑，仅引用颜色变量 */
+/* _overlays_feedback.scss */
 .message {
     background: #222;
-    color: $text-main;
+    color: white;
     &.success { border-left: 4px solid $success-color; }
     &.error { border-left: 4px solid $danger-color; }
 }
@@ -13,14 +9,4 @@
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes slideIn {
-    from { transform: translateX(-20px); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-}
-
-@keyframes loading-wave {
-    0% { top: 36px; left: 36px; width: 0; height: 0; opacity: 1; }
-    100% { top: 0; left: 0; width: 72px; height: 72px; opacity: 0; }
 }
